@@ -47,7 +47,6 @@ async def process_pre_check(pre_checkout_query: PreCheckoutQuery):
 
 @router.message(SuccessfulPayment)
 async def process_puy(message: Message):
-    print('SP')
     if message.successful_payment.invoice_payload == 'buy_book':
         await bot.send_message(message.chat.id, 'Successful!')
         books = getting_information_from_the_cart(user_id=message.from_user.id)
