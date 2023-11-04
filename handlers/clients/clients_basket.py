@@ -18,11 +18,6 @@ async def basket_of_cart(message: Message):
         await message.answer(book)
 
 
-# async def add_basket(callback: CallbackQuery):
-#     user_id = callback.from_user.id
-#     update_basket(user_id=user_id, name=, author=, price=)
-
-
 @router.callback_query(F.data == 'buy_all_books')
 async def process_buy_books(callback: CallbackQuery):
     user_id = callback.from_user.id
