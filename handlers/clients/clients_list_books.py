@@ -52,7 +52,9 @@ async def buy_now(callback: CallbackQuery):
     id_book = int(callback.data.replace('in', ''))
     user_id = callback.from_user.id
     name, author, price, photo = get_book(id_book=id_book)
-    if f' {name} {author} {price};' in getting_information_from_the_cart(user_id=callback.from_user.id)[0]:
+    basket = getting_information_from_the_cart(user_id=callback.from_user.id)[0]
+    print(f' {name} {author} {price};' in basket)
+    if f' {name} {author} {price};' in basket:
         await callback.answer('Книга уже есть в корзине)')
     else:
         update_basket(user_id, name.capitalize(), author.title(), price)
