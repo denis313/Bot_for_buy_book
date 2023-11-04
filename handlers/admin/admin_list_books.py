@@ -9,7 +9,7 @@ router = Router()
 '''                                         Список книг в базе                                '''
 
 
-@router.message(F.text == 'Список книг в базе')
+@router.message(F.text == 'Список книг в базе 📚')
 async def all_book_for_admin(message: Message):
     if message.from_user.id in admins_ids:
         all_books = get_all_books()

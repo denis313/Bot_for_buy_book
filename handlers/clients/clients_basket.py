@@ -8,7 +8,7 @@ from keyboards.buy_books_keyboard import keyboard_book
 router = Router()
 
 
-@router.message(F.text == 'Корзина')
+@router.message(F.text == 'Корзина 🗑')
 async def basket_of_cart(message: Message):
     user_id = message.from_user.id
     books = getting_information_from_the_cart(user_id=user_id)

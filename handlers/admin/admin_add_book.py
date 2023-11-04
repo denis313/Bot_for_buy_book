@@ -23,13 +23,13 @@ class FSMAdmin(StatesGroup):
     price = State()
 
 
-@router.message(F.text == 'Stop')
+@router.message(F.text == 'Stop 🛑')
 async def process_gender_press(message: Message, state: FSMContext):
     await message.answer('Заполние прекращено', reply_markup=keyboard_for_admin)
     await state.clear()
 
 
-@router.message(F.text == 'Добавить книгу')
+@router.message(F.text == 'Добавить книгу ✅')
 async def add_book(message: Message, state: FSMContext):
     if message.from_user.id in admins_ids:
         await state.set_state(FSMAdmin.name)

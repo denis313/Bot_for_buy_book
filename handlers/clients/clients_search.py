@@ -13,13 +13,13 @@ class Search(StatesGroup):
     author = State()
 
 
-@router.message(F.text == 'Stop')
+@router.message(F.text == 'Stop 🛑')
 async def process_gender_press(message: Message, state: FSMContext):
     await message.answer('Заполние прекращено', reply_markup=main_keyboard)
     await state.clear()
 
 
-@router.message(F.text == 'Поиск')
+@router.message(F.text == 'Поиск 🔎')
 async def search_book(message: Message, state: FSMContext):
     await state.set_state(Search.name)
     await message.answer(text="Отправьте название книги:", reply_markup=stop_fsm())

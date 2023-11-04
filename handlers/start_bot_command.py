@@ -13,10 +13,10 @@ router = Router()
 @router.message(CommandStart())
 async def process_start_command(message: Message):
     if message.from_user.id in admins_ids:
-        await message.answer('Вы администратор\n'
+        await message.answer('💼 Вы администратор\n'
                              'Можно добавлять и удалять книги', reply_markup=keyboard_for_admin)
     else:
-        await message.answer('Бот позволяет покупать христианскую литературу прямо в телеграме\n\n'
+        await message.answer('🤖 Бот позволяет покупать христианскую литературу прямо в телеграме\n\n'
                              'Используйте клавиатуру для взаимодействия с Ботом\n\n'
                              'Если что-то не понятно отправь команду /help', reply_markup=main_keyboard)
         user_id: int = message.from_user.id

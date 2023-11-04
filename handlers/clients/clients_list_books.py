@@ -12,7 +12,7 @@ from filters_for_handler.Admin_filter import BuyNow, InBasket
 router = Router()
 
 
-@router.message(F.text == 'Список книг')
+@router.message(F.text == 'Список книг 📚')
 async def list_books(message: Message):
     all_books = get_all_books()
     # print(all_books)
@@ -53,12 +53,11 @@ async def buy_now(callback: CallbackQuery):
     user_id = callback.from_user.id
     name, author, price, photo = get_book(id_book=id_book)
     basket = getting_information_from_the_cart(user_id=callback.from_user.id)[0]
-    print(f' {name} {author} {price};' in basket)
-    if f' {name} {author} {price};' in basket:
-        await callback.answer('Книга уже есть в корзине)')
+    if f' {name.capitalize()} {author.title()} {price};' in basket:
+        await callback.answer('Книга уже есть в корзине 👍')
     else:
         update_basket(user_id, name.capitalize(), author.title(), price)
-        await callback.answer('Книга добавлена в корзину)')
+        await callback.answer('Книга добавлена в корзину ✔️')
 
 
 class Search(StatesGroup):
@@ -66,13 +65,13 @@ class Search(StatesGroup):
     author = State()
 
 
-@router.message(F.text == 'Stop')
+@router.message(F.text == 'Stop 🛑')
 async def process_gender_press(message: Message, state: FSMContext):
-    await message.answer('Заполние прекращено', reply_markup=main_keyboard)
+    await message.answer('Заполние прекращено ❌', reply_markup=main_keyboard)
     await state.clear()
 
 
-@router.message(F.text == 'Поиск')
+@router.message(F.text == 'Поиск 🔎')
 async def search_book(message: Message, state: FSMContext):
     await state.set_state(Search.name)
     await message.answer(text="Отправьте название книги:", reply_markup=stop_fsm())
@@ -103,7 +102,7 @@ async def search_author_book(message: Message, state: FSMContext):
         await message.answer("Такой книги нет😭", reply_markup=main_keyboard)
 
 
-@router.message(F.text == 'Корзина')
+@router.message(F.text == 'Корзина 🗑')
 async def basket_of_cart(message: Message):
     user_id = message.from_user.id
     books = getting_information_from_the_cart(user_id=user_id)
