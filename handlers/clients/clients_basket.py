@@ -1,6 +1,6 @@
 from aiogram import F, Router
 from config import bot
-from data_base.buy_books_bd_for_books import get_book
+# from data_base.buy_books_bd_for_books import get_book
 from data_base.buy_books_bd_users import getting_information_from_the_cart
 from aiogram.types import Message, CallbackQuery, PreCheckoutQuery, LabeledPrice, SuccessfulPayment
 from keyboards.buy_books_keyboard import keyboard_book
