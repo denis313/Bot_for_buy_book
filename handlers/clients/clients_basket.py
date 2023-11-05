@@ -48,8 +48,8 @@ async def process_puy(message: Message):
         books_for_buy = books[0].split(';')[0:-1]
         await bot.send_message(-1001790065720,
                                f'{message.first_name, message.last_name, message.username} {books_for_buy}')
-    else:
-        name, author, price, photo = get_book(id_book=int(message.successful_payment.invoice_payload.replace("payload", "")))
-        await bot.send_message(-1001790065720,
-                               f'{message.first_name, message.last_name, message.username} '
-                               f'{name, author, price}')
+    # else:
+    #     # name, author, price, photo = get_book(id_book=int(message.successful_payment.invoice_payload.replace("payload", "")))
+    #     await bot.send_message(-1001790065720,
+    #                            f'{message.first_name, message.last_name, message.username} '
+    #                            f'{name, author, price}')
