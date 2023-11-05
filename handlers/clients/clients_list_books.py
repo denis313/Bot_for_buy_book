@@ -1,13 +1,13 @@
 from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
-
 from config import bot
 from data_base.buy_books_bd_for_books import get_all_books, get_book, search_for_book_in_bd
 from data_base.buy_books_bd_users import update_basket, getting_information_from_the_cart
-from aiogram.types import Message, CallbackQuery, PreCheckoutQuery, LabeledPrice, SuccessfulPayment
+from aiogram.types import Message, CallbackQuery, PreCheckoutQuery, LabeledPrice
 from keyboards.buy_books_keyboard import keyboard_for_book, main_keyboard, stop_fsm, keyboard_book
 from filters_for_handler.Admin_filter import BuyNow, InBasket
+
 
 router = Router()
 
@@ -15,7 +15,6 @@ router = Router()
 @router.message(F.text == 'Список книг 📚')
 async def list_books(message: Message):
     all_books = get_all_books()
-    # print(all_books)
     for book in all_books:
         id_book, name, author, description, price, photo = book
         await message.answer_photo(photo=photo, caption=f'<b>Название:</b> {name.capitalize()}\n'
@@ -112,11 +111,6 @@ async def basket_of_cart(message: Message):
         await message.answer(book)
 
 
-# async def add_basket(callback: CallbackQuery):
-#     user_id = callback.from_user.id
-#     update_basket(user_id=user_id, name=, author=, price=)
-
-
 @router.callback_query(F.data == 'buy_all_books')
 async def process_buy_books(callback: CallbackQuery):
     user_id = callback.from_user.id
@@ -150,7 +144,8 @@ async def process_pre_check(pre_checkout_query: PreCheckoutQuery):
 #         await bot.send_message(-1001790065720,
 #                                f'{message.first_name, message.last_name, message.username} {books_for_buy}')
 #     else:
-#         name, author, price, photo = get_book(id_book=int(message.successful_payment.invoice_payload.replace("payload", "")))
+#         name, author, price, photo = get_book(id_book=
+#         int(message.successful_payment.invoice_payload.replace("payload", "")))
 #         await bot.send_message(-1001790065720,
 #                                f'{message.first_name, message.last_name, message.username} '
 #                                f'{name, author, price}')

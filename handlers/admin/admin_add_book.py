@@ -9,8 +9,6 @@ from config import admins_ids
 
 
 router = Router()
-# admin_ids = [1087502760]
-# router.message.filter(IsAdmin(admin_ids))
 
 '''                                         Добавление новой книги                                '''
 
@@ -79,7 +77,6 @@ async def add_photo(message: Message, state: FSMContext):
 
     for key, value in data.items():
         book[key] = value
-    # print(book)
     await message.answer_photo(photo=photo, caption=f'<b>Название:</b> {book["name"].capitalize()}\n'
                                                     f'<b>Автор:</b> {book["author"].title()}\n'
                                                     f'<b>Описание:</b> {book["description"].capitalize()}\n'
