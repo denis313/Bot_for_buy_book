@@ -6,8 +6,8 @@ from data_base.buy_books_bd_for_books import get_all_books, get_book, search_for
 from data_base.buy_books_bd_users import update_basket, getting_information_from_the_cart
 from aiogram.types import Message, CallbackQuery, PreCheckoutQuery, LabeledPrice
 from keyboards.buy_books_keyboard import keyboard_for_book, main_keyboard, stop_fsm, keyboard_book
-from filters_for_handler.Admin_filter import BuyNow, InBasket
-
+# from filters_for_handler.Admin_filter import BuyNow, InBasket
+from keyboards.callback_data_classes import BuyCallbackFactory, InBasketCallbackFactory
 
 router = Router()
 
@@ -25,9 +25,10 @@ async def list_books(message: Message):
                                                         parse_mode='HTML')
 
 
-@router.callback_query(BuyNow())
-async def buy_now(callback: CallbackQuery):
-    id_book = int(callback.data.replace('buy', ''))
+@router.callback_query(BuyCallbackFactory.filter())
+async def buy_now(callback: CallbackQuery,
+                  callback_data: BuyCallbackFactory):
+    id_book = callback_data.id_book
     user_id = callback.from_user.id
     book = get_book(id_book=id_book)
     name, author, price, photo = book
@@ -46,9 +47,10 @@ async def buy_now(callback: CallbackQuery):
                                             amount=int(price) * 100)])
 
 
-@router.callback_query(InBasket())
-async def buy_now(callback: CallbackQuery):
-    id_book = int(callback.data.replace('in', ''))
+@router.callback_query(InBasketCallbackFactory.filter())
+async def buy_now(callback: CallbackQuery,
+                  callback_data: InBasketCallbackFactory):
+    id_book = callback_data.id_book
     user_id = callback.from_user.id
     name, author, price, photo = get_book(id_book=id_book)
     basket = getting_information_from_the_cart(user_id=callback.from_user.id)[0]
