@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher
 env = Env()
 env.read_env()
 
-# bot_token = '5196838263:AAGqNO2Q-BpsQHgKhTf4DZDQt-e4TLQRKkU'
+bot_token = '6929515792:AAF78OQy867ZgnX_cj_ihILEX_91hbYNzZ8'
 # ykassa = env('YKASSA')
 admins_ids = [1087502760]
 

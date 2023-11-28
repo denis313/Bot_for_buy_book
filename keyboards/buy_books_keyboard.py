@@ -1,5 +1,5 @@
 from aiogram.types import InlineKeyboardMarkup, ReplyKeyboardMarkup, InlineKeyboardButton, KeyboardButton
-
+from keyboards.callback_data_classes import BuyCallbackFactory, InBasketCallbackFactory
 '''   
         Создание обьект основной клавиатуры Пользователя и кнопок для основной клавиатуры Пользователя
 '''
@@ -25,8 +25,14 @@ keyboard_book = InlineKeyboardMarkup(inline_keyboard=[[btn_book]])
 
 
 def keyboard_for_book(id_book):
-    btn_book_1 = InlineKeyboardButton(text='Купить сразу 💰', callback_data=str(id_book)+'buy')
-    btn_book_2 = InlineKeyboardButton(text='В корзину 🗑', callback_data=str(id_book)+'in')
+    btn_book_1 = InlineKeyboardButton(text='Купить сразу 💰', callback_data=(BuyCallbackFactory(
+        id_book=id_book
+    ).pack())
+    )
+    btn_book_2 = InlineKeyboardButton(text='В корзину 🗑', callback_data=(InBasketCallbackFactory(
+        id_book=id_book
+    ).pack())
+    )
     keyboard_buy_basket = InlineKeyboardMarkup(inline_keyboard=[[btn_book_1, btn_book_2]])
     return keyboard_buy_basket
 
